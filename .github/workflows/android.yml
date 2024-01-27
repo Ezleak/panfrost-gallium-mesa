@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [ "arm32", "aarch64" ]
+        arch: [ "aarch64" ]
       fail-fast: false
 
     name: "Build for ${{matrix.arch}}"
@@ -44,7 +44,7 @@ jobs:
           cd ..
           envsubst <android-${{matrix.arch}} >build-crossfile
           meson setup "build-android" \
-            --prefix=/tmp/pan \
+            --prefix=/tmp/mesa \
             --cross-file "build-crossfile" \
             -Dplatforms=android \
             -Dplatform-sdk-version=26 \
@@ -57,11 +57,11 @@ jobs:
             -Dopengl=true \
             -Dosmesa=true \
             -Dvulkan-drivers= \
-            -Dgallium-drivers=swrast,panfrost \
+            -Dgallium-drivers=zink,virgl \
             -Dshared-glapi=false
           ninja -C "build-android" install
       - name: Upload libraries
         uses: actions/upload-artifact@v2
         with:
-          name: panfrost_${{matrix.arch}}
-          path: /tmp/pan
+          name: libOSMesa_${{matrix.arch}}
+          path: /tmp/mesa
