@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [ "arm32", "aarch64" ]
+        arch: [ "aarch64" ]
       fail-fast: false
 
     name: "Build for ${{matrix.arch}}"
@@ -47,7 +47,7 @@ jobs:
             --prefix=/tmp/pan \
             --cross-file "build-crossfile" \
             -Dplatforms=android \
-            -Dplatform-sdk-version=26 \
+            -Dplatform-sdk-version=27 \
             -Dandroid-stub=true \
             -Dllvm=disabled \
             -Dxlib-lease=disabled \
@@ -56,8 +56,8 @@ jobs:
             -Dglx=disabled \
             -Dopengl=true \
             -Dosmesa=true \
-            -Dvulkan-drivers= \
-            -Dgallium-drivers=swrast,panfrost,kmsro \
+            -Dvulkan-drivers=panfrost \
+            -Dgallium-drivers= \
             -Dshared-glapi=false
           ninja -C "build-android" install
       - name: Upload libraries
