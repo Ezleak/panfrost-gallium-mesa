@@ -56,8 +56,8 @@ jobs:
             -Dglx=disabled \
             -Dopengl=true \
             -Dosmesa=true \
-            -Dvulkan-drivers=panfrost \
-            -Dgallium-drivers=swrast,kmsro \
+            -Dvulkan-drivers= \
+            -Dgallium-drivers=kmsro \
             -Dshared-glapi=false
           ninja -C "build-android" install
       - name: Upload libraries
