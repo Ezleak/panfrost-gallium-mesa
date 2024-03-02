@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [ "arm32", "aarch64" ]
+        arch: [ "aarch64" ]
       fail-fast: false
 
     name: "Build for ${{matrix.arch}}"
@@ -48,7 +48,7 @@ jobs:
             -Dtools=panfrost \
             --cross-file "build-crossfile" \
             -Dplatforms=android \
-            -Dplatform-sdk-version=26 \
+            -Dplatform-sdk-version=33 \
             -Dandroid-stub=true \
             -Dllvm=disabled \
             -Dxlib-lease=disabled \
@@ -58,9 +58,9 @@ jobs:
             -Dopengl=true \
             -Dosmesa=true \
             -Dvulkan-drivers= \
-            -Dgallium-drivers=swrast,panfrost \
+            -Dgallium-drivers=panfrost \
             -Dshared-glapi=false \
-            -Dbuildtype=debug
+            -Dbuildtype=release
           ninja -C "build-android" install
           cd /tmp/pan
           mv lib/libOSMesa.so.8.0.0 libOSMesa_pan.so
