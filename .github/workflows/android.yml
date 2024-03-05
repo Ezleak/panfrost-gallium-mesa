@@ -58,7 +58,7 @@ jobs:
             -Dopengl=true \
             -Dosmesa=true \
             -Dvulkan-drivers= \
-            -Dgallium-drivers=panfrost \
+            -Dgallium-drivers=zink,virgl \
             -Dshared-glapi=false \
             -Dbuildtype=release
           ninja -C "build-android" install
